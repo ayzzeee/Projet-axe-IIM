@@ -101,6 +101,7 @@ public class HeroEntity : MonoBehaviour
     private CameraFollowable _cameraFollowable;
     public bool isHorizontalMoving => _moveDirX != 0f;
 
+
 private void Awake()
 {
     _rigidbody = GetComponent<Rigidbody2D>();
@@ -710,7 +711,7 @@ private void Awake()
         if (_heroController is null) 
         Debug.LogError("Hero controller is NULL");
 
-        Collectable.OnObjectCollected += OnObjectCollected;
+        Collectible.OnObjectCollected += OnObjectCollected;
     }
 
     private void OnGUI()
