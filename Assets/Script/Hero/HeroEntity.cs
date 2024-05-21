@@ -10,6 +10,8 @@ public class HeroEntity : MonoBehaviour
     private HeroHorizontalMovementSettings _groundHorizontalMovementSettings;
 
     [SerializeField] private HeroHorizontalMovementSettings _airHorizontalMovementSettings;
+    [SerializeField] private HeroController _heroController;
+
 
     private float _horizontalSpeed = 0f;
     private float _moveDirX = 0f;
@@ -682,6 +684,21 @@ public class HeroEntity : MonoBehaviour
         _orientX = Mathf.Sign(_moveDirX);
     }
 
+    private int _objects;
+    public int Ojects { get => _objects; }
+    private void OnObjectCollected(){
+        _objects++;
+    }
+
+    void Start ()
+    {
+        _heroController = GetComponent<HeroController>();
+        if (_heroController is null) 
+        Debug.LogError("Hero controller is NULL");
+
+        Collectable.OnObjectCollected += OnObjectCollected;
+    }
+
     private void OnGUI()
     {
         if (!_guiDebug) return;
@@ -723,3 +740,4 @@ public class HeroEntity : MonoBehaviour
         GUILayout.Label($"Horizontal Speed = {_horizontalSpeed}");
 
         GUILayout.EndVertical();
+        }}
