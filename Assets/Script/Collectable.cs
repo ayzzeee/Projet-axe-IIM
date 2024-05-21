@@ -1,18 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Action OnObjectCollected;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OntriggerEnter( Collider other) {
+        if(!(OnObjectCollected is null)) 
+        OnObjectCollected();
+        Destroy(gameObject);
     }
 }
