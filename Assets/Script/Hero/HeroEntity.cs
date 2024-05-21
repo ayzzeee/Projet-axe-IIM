@@ -101,12 +101,26 @@ public class HeroEntity : MonoBehaviour
     private CameraFollowable _cameraFollowable;
     public bool isHorizontalMoving => _moveDirX != 0f;
 
-    private void Awake()
+private void Awake()
+{
+    _rigidbody = GetComponent<Rigidbody2D>();
+    if (_rigidbody == null)
     {
-        _cameraFollowable = GetComponent<CameraFollowable>();
+        Debug.LogError("Rigidbody2D component is missing on this GameObject");
+    }
+
+    _cameraFollowable = GetComponent<CameraFollowable>();
+    if (_cameraFollowable == null)
+    {
+        Debug.LogError("CameraFollowable component is missing on this GameObject");
+    }
+    else
+    {
         _cameraFollowable.FollowPositionX = _rigidbody.position.x;
         _cameraFollowable.FollowPositionY = _rigidbody.position.y;
     }
+}
+
 
     private void _UpdateCameraFollowPosition()
     {
